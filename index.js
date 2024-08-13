@@ -1,9 +1,7 @@
-// TODO: Include packages needed for this application
 // We need 'inquirer' for prompting user input and 'fs' for file system operations.
 import inquirer from 'inquirer';
 import fs from 'fs';
 
-// TODO: Create an array of questions for user input
 // Define the questions to ask the user using Inquirer.
 const questions = [
     {
@@ -54,7 +52,6 @@ const questions = [
     },
 ];
 
-// TODO: Create a function to write README file
 // This function writes the README content to a file.
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
@@ -68,8 +65,17 @@ function writeToFile(fileName, data) {
 
 // Function to generate README content based on user input
 function generateREADME(answers) {
+    const licenseBadge = {
+        MIT: '![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)',
+        GPLv3: '![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)',
+        'Apache 2.0': '![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)',
+        None: ''
+    };
+
     return `
 # ${answers.title}
+
+${licenseBadge[answers.license]}  <!-- Badge added here -->
 
 ## Description
 ${answers.description}
@@ -104,7 +110,6 @@ If you have any questions, please reach out:
   `;
 }
 
-// TODO: Create a function to initialize app
 // This function initializes the app by prompting the user and generating the README.
 function init() {
     inquirer.prompt(questions).then((answers) => {
